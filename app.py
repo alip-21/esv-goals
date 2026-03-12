@@ -5,7 +5,7 @@ import pandas as pd
 st.set_page_config(page_title="ESV Goals Tracker", layout="wide")
 
 # 2. Connect to your Google Sheet (Export to CSV link)
-SHEET_NAME = st.secrets["spreadsheet_id"]
+SHEET_ID = st.secrets["spreadsheet_id"]
 url = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/export?format=csv"
 
 # Load Data
