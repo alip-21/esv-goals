@@ -5,9 +5,9 @@ import pandas as pd
 st.set_page_config(page_title="ESV Goals Tracker", layout="wide")
 
 # 2. Connect to your Google Sheet (Export to CSV link)
-SHEET_ID = '1g5sGDtylfkkaoHjHlP_LXhZE7qo8NkqGagSGqzKg_iw'
-SHEET_NAME = 'ESV Goals'
-url = f'https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&sheet={SHEET_NAME}'
+SHEET_ID = '1g5sGDtylfkkaoHjHlP_LXhZE7qo8NkqGagSGqzKg_iw'.strip()
+SHEET_NAME = 'ESV Goals'.strip()
+url = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/export?format=csv&gid=0"
 
 # Load Data
 df = pd.read_csv(url)
