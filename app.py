@@ -21,7 +21,7 @@ selected_category = st.sidebar.multiselect("Select Category", options=df["Catego
 filtered_df = df[(df["Year"].isin(selected_year)) & (df["Person"].isin(selected_person)) & (df["Category"].isin(selected_category))]
 
 # --- 4. Main Dashboard ---
-st.title("🏆 ESV Annual Goals & Penalty Shots")
+st.title("🏆 ESV Goals")
 
 # Create 3 columns
 col1, col2, col3 = st.columns(3)
