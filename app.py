@@ -26,20 +26,21 @@ st.title("🏆 ESV Annual Goals & Penalty Shots")
 # Create 3 columns
 col1, col2, col3 = st.columns(3)
 
+total_shots = filtered_df["Shot"].sum()
+total_goals = len(filtered_df)
+successes = len(filtered_df[filtered_df["Status"] == "Yes"])
+
 # Metric 1: Total Goals
 with col1:
     st.metric(label="Total Goals Tracked", value=total_goals)
 
 # Metric 2: Total Shots
 with col2:
-    total_shots = filtered_df["Shot"].sum()
     st.metric(label="Total Shots Owed", value=int(total_shots))
 
 # Metric 3: Success Rate
 with col3:
     # Calculating %: (Count of 'Yes' / Total Goals) * 100
-    total_goals = len(filtered_df)
-    successes = len(filtered_df[filtered_df["Status"] == "Yes"])
     if total_goals > 0:
         rate = (successes / total_goals) * 100
         st.metric(label="Success Rate", value=f"{rate:.1f}%")
