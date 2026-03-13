@@ -32,11 +32,11 @@ successes = len(filtered_df[filtered_df["Status"] == "Yes"])
 
 # Metric 1: Total Goals
 with col1:
-    st.metric(label="Total Goals Tracked", value=total_goals)
+    st.metric(label="Total Goals", value=total_goals)
 
 # Metric 2: Total Shots
 with col2:
-    st.metric(label="Total Shots Owed", value=int(total_shots))
+    st.metric(label="Total Shots", value=int(total_shots))
 
 # Metric 3: Success Rate
 with col3:
