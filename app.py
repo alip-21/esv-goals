@@ -25,7 +25,8 @@ st.title("🥃 ESV Goals")
 
 # Metric Row
 total_shots = filtered_df["Shot"].sum()
-st.metric(label="Total Shots Owed", value=int(total_shots)) st.metric(label="Total Shots Owed", value=int(total_shots))
+st.metric(label="Total Shots Owed", value=int(total_shots))
+st.metric(label="Total Shots Owed", value=int(total_shots))
 
 # Show the Data Table
 st.subheader("Goal Details")
