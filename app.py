@@ -15,9 +15,10 @@ df = pd.read_csv(url)
 st.sidebar.header("Filter the Bloodbath")
 selected_year = st.sidebar.multiselect("Select Year", options=df["Year"].unique(), default=df["Year"].unique())
 selected_person = st.sidebar.multiselect("Select Person", options=df["Person"].unique(), default=df["Person"].unique())
+selected_category = st.sidebar.multiselect("Select Category", options=df["Category"].unique(), default=df["Category"].unique())
 
 # Filter the data based on selection
-filtered_df = df[(df["Year"].isin(selected_year)) & (df["Person"].isin(selected_person))]
+filtered_df = df[(df["Year"].isin(selected_year)) & (df["Person"].isin(selected_person)) & (df["Category"].isin(selected_category))]
 
 # 4. Main Dashboard
 st.title("🥃 ESV Goals")
