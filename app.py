@@ -20,13 +20,33 @@ selected_category = st.sidebar.multiselect("Select Category", options=df["Catego
 # Filter the data based on selection
 filtered_df = df[(df["Year"].isin(selected_year)) & (df["Person"].isin(selected_person)) & (df["Category"].isin(selected_category))]
 
-# 4. Main Dashboard
-st.title("🥃 ESV Goals")
+# --- 4. Main Dashboard ---
+st.title("🏆 ESV Annual Goals & Penalty Shots")
 
-# Metric Row
-total_shots = filtered_df["Shot"].sum()
-st.metric(label="Total Shots Owed", value=int(total_shots))
-st.metric(label="Total Shots Owed", value=int(total_shots))
+# Create 3 columns
+col1, col2, col3 = st.columns(3)
+
+# Metric 1: Total Goals
+with col1:
+    st.metric(label="Total Goals Tracked", value=total_goals)
+
+# Metric 2: Total Shots
+with col2:
+    total_shots = filtered_df["Shot"].sum()
+    st.metric(label="Total Shots Owed", value=int(total_shots))
+
+# Metric 3: Success Rate
+with col3:
+    # Calculating %: (Count of 'Yes' / Total Goals) * 100
+    total_goals = len(filtered_df)
+    successes = len(filtered_df[filtered_df["Status"] == "Yes"])
+    if total_goals > 0:
+        rate = (successes / total_goals) * 100
+        st.metric(label="Success Rate", value=f"{rate:.1f}%")
+    else:
+        st.metric(label="Success Rate", value="0%")
+
+st.divider() # Adds a nice clean line under your metrics
 
 # Show the Data Table
 st.subheader("Goal Details")
