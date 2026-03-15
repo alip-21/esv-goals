@@ -62,11 +62,12 @@ st.markdown("")
 
 # 7. Chart = Total shots
 st.subheader("Shots")
+
 shot_chart_data = (
-    filtered_df.groupby("Person")["Shot"]
-    .sum()
+    filtered_df.groupby("Person")
+    .agg(Total_Shots=("Shot","sum"), Total_Goals=("Goal", "count"))
     .reset_index()
-    .sort_values(by="Shot", ascending=False)
+    .sort_values(by=["Total_Shots", "Total_Goals"], ascending=[False, True])
 )
 
 chart = (
@@ -74,7 +75,7 @@ chart = (
     .mark_bar()
     .encode(
         x=alt.X("Person:N", sort="-y", title="Person"), 
-        y=alt.Y("Shot:Q", title="Shots"),
+        y=alt.Y("Total_Shots:Q", title="Shots"),
         color=alt.value("#1c1f3e")
     )
     .properties(height=400)
