@@ -43,11 +43,12 @@ with st.expander("🔍", expanded=False):
 filtered_df = df[(df["Year"].isin(selected_year)) & (df["Person"].isin(selected_person)) & (df["Category"].isin(selected_category))]
 
 # 5. Data table
+dynamic_height = min(600, (len(filtered_df)*35)+45)
 st.dataframe(
     filtered_df[["Year", "Person", "Category", "Goal", "Status", "Shot"]],
     use_container_width=True,
     hide_index=True,
-    height=600,
+    height=dynamic_height,
     column_config={
         "Year": st.column_config.TextColumn("Year"),
         "Shot": st.column_config.TextColumn("Shot"),
