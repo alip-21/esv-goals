@@ -94,7 +94,7 @@ with col2:
 with col3:
     st.write("")
     st.write("")
-    with st.container(border=True, height=220):
+    with st.container(border=True, height=224):
         st.markdown(f"### 🥉 #3 {winners[2]['Person']}")
         st.metric("Success Rate", f"{winners[2]['Success_Rate']:.0%}")
         st.caption(f"{int(winners[2]['Total_Goals'])} Total Goals")
