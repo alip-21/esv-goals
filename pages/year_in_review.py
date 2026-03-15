@@ -25,15 +25,33 @@ with st.expander("🔍", expanded=True):
     
 filtered_df = df[df["Year"] == selected_year]
 
-# 5. Data table
-dynamic_height = min(600, (len(filtered_df)*35)+45)
-st.dataframe(
-    filtered_df[["Year", "Person", "Category", "Goal", "Status", "Shot"]],
-    use_container_width=True,
-    hide_index=True,
-    height=dynamic_height,
-    column_config={
-        "Year": st.column_config.TextColumn("Year"),
-        "Shot": st.column_config.TextColumn("Shot"),
-    }
-)
+# 5. 3 metrics across 3 columns
+col1, col2, col3 = st.columns(3)
+
+total_shots = filtered_df["Shot"].sum()
+total_goals = len(filtered_df)
+successes = len(filtered_df[filtered_df["Status"] == "Yes"])
+
+# Metric 1: Total Goals
+with col1:
+    st.metric(label="Total Goals", value=total_goals)
+
+# Metric 2: Total Shots
+with col2:
+    st.metric(label="Total Shots", value=int(total_shots))
+
+# Metric 3: Success Rate
+with col3:
+    # Calculating %: (Count of 'Yes' / Total Goals) * 100
+    if total_goals > 0:
+        rate = (successes / total_goals) * 100
+        st.metric(label="Success Rate", value=f"{rate:.1f}%")
+    else:
+        st.metric(label="Success Rate", value="0%")
+
+st.divider() # Adds a nice clean line under your metrics
+
+# 6. The "Hall of Shame" Chart
+st.subheader("Penalty Shot Leaderboard")
+shot_chart_data = filtered_df.groupby("Person")["Shot"].sum().sort_values(ascending=False)
+st.bar_chart(shot_chart_data)
