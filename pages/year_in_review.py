@@ -70,7 +70,7 @@ shot_chart_data = (
 
 st.bar_chart(
     shot_chart_data,
-    x="Shot",
+    x="Total Shots",
     y="Person",
     horizontal=True
 )
