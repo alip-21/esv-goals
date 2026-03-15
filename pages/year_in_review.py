@@ -78,18 +78,29 @@ winners = podium_df.to_dict('records')
 
 col2, col1, col3 = st.columns(3)
 
-def draw_podium_col(column, winner, rank_emoji, rank_num, height_offset):
-    with column:
-        for _ in range(height_offset):
-            st.write("")            
-        with st.container(border=True, height=220):
-            st.markdown(f"### {rank_emoji} {rank_num} {winner['Person']}")
-            st.metric("Success Rate", f"{winner['Success_Rate']:.0%}")
-            st.caption(f"{int(winner['Total_Goals'])} Total Goals")
+with col1:
+    with st.container(border=True, height=240):
+        st.markdown(f"### 🥇 #1 {winners[0]['Person']}")
+        st.metric("Success Rate", f"{winners[0]['Success_Rate']:.0%}")
+        st.caption(f"{int(winners[0]['Total_Goals'])} Total Goals")
 
-    draw_podium_col(col2, winners[1], "🥈", "#2", 2) # Offset by 2 for Silver
-    draw_podium_col(col1, winners[0], "🥇", "#1", 0) # No offset for Gold
-    draw_podium_col(col3, winners[2], "🥉", "#3", 4) # Offset by 4 for Bronze
+with col2:
+    st.write("")
+    st.write("")
+    with st.container(border=True, height=240):
+        st.markdown(f"### 🥈 #2 {winners[1]['Person']}")
+        st.metric("Success Rate", f"{winners[1]['Success_Rate']:.0%}")
+        st.caption(f"{int(winners[1]['Total_Goals'])} Total Goals")
+
+with col1:
+    st.write("")
+    st.write("")
+    st.write("")
+    st.write("")
+    with st.container(border=True, height=240):
+        st.markdown(f"### 🥉 #3 {winners[2]['Person']}")
+        st.metric("Success Rate", f"{winners[2]['Success_Rate']:.0%}")
+        st.caption(f"{int(winners[2]['Total_Goals'])} Total Goals")
 
 else:
     st.warning("No data found for the current year")
