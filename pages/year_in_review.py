@@ -16,12 +16,11 @@ st.title("Year in Review")
 unique_years = sorted(df["Year"].unique(), reverse=True)
 default_year = 1
 
-with st.expander("🔍", expanded=True):
-    selected_year = st.selectbox(
-        "Select Year",             
-        options=unique_years, 
-        index=default_year
-    )
+selected_year = st.selectbox(
+    "Select Year",             
+    options=unique_years, 
+    index=default_year
+)
     
 filtered_df = df[df["Year"] == selected_year]
 
