@@ -43,5 +43,9 @@ filtered_df = df[(df["Year"].isin(selected_year)) & (df["Person"].isin(selected_
 st.dataframe(
     filtered_df[["Year", "Person", "Goal", "Status", "Shot"]],
     use_container_width=True,
-    hide_index=True
+    hide_index=True,
+    column_config={
+        "Year": st.column_config.TextColumn("Year"),
+        "Shot": st.column_config.TextColumn("Shot"),
+    }
 )
