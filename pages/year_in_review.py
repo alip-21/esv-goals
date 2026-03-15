@@ -17,13 +17,13 @@ unique_years = sorted(df["Year"].unique(), reverse=True)
 default_year = [unique_years[1]]
 
 with st.expander("🔍", expanded=True):
-    selected_year = st.multiselect(
+    selected_year = st.selectbox(
         "Select Year",             
         options=sorted(df["Year"].unique()), 
         default=default_year
     )
     
-filtered_df = df[(df["Year"].isin(selected_year))]
+filtered_df = df[(df["Year"] == selected_year]
 
 # 5. Data table
 dynamic_height = min(600, (len(filtered_df)*35)+45)
