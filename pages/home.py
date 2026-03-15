@@ -1,29 +1,45 @@
 import streamlit as st
 import pandas as pd
 
-# 1. Page Config
+# 1. Page configuration
 st.set_page_config(page_title="ESV Goals Tracker", layout="wide")
 
-# 2. Connect to your Google Sheet (Export to CSV link)
+# 2. Connect to Google Sheet (Export to CSV link)
 SHEET_ID = st.secrets["spreadsheet_id"]
 url = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/export?format=csv"
-
-# Load Data
 df = pd.read_csv(url)
 
-# 3. Sidebar Filters
-st.sidebar.header("Filter the Bloodbath")
-selected_year = st.sidebar.multiselect("Select Year", options=df["Year"].unique(), default=df["Year"].unique())
-selected_person = st.sidebar.multiselect("Select Person", options=df["Person"].unique(), default=df["Person"].unique())
-selected_category = st.sidebar.multiselect("Select Category", options=df["Category"].unique(), default=df["Category"].unique())
+# 3. Page filters
+with st.expander("🔍 Filter the Bloodbath", expanded=False):
+    col1, col2, col3 = st.columns(3)
+    
+    with col1:
+        selected_year = st.multiselect(
+            "Select Year", 
+            options=sorted(df["Year"].unique(), reverse=True), 
+            default=df["Year"].unique()
+        )
+    
+    with col2:
+        selected_person = st.multiselect(
+            "Select Person", 
+            options=sorted(df["Person"].unique()), 
+            default=df["Person"].unique()
+        )
+        
+    with col3:
+        selected_category = st.multiselect(
+            "Select Category", 
+            options=sorted(df["Category"].unique()), 
+            default=df["Category"].unique()
+        )
 
-# Filter the data based on selection
 filtered_df = df[(df["Year"].isin(selected_year)) & (df["Person"].isin(selected_person)) & (df["Category"].isin(selected_category))]
 
-# --- 4. Main Dashboard ---
+# 4. Page header
 st.title("🏆 ESV Goals")
 
-# Create 3 columns
+# 5. 3 metrics across 3 columns
 col1, col2, col3 = st.columns(3)
 
 total_shots = filtered_df["Shot"].sum()
@@ -49,7 +65,7 @@ with col3:
 
 st.divider() # Adds a nice clean line under your metrics
 
-# Show the Data Table
+# 6. Data table
 st.subheader("Goal Details")
 st.dataframe(
     filtered_df[["Year", "Person", "Goal", "Status", "Shot"]],
@@ -57,7 +73,7 @@ st.dataframe(
     hide_index=True
 )
 
-# 5. The "Hall of Shame" Chart
+# 7. The "Hall of Shame" Chart
 st.subheader("Penalty Shot Leaderboard")
 shot_chart_data = filtered_df.groupby("Person")["Shot"].sum().sort_values(ascending=False)
 st.bar_chart(shot_chart_data)
