@@ -69,5 +69,6 @@ shot_chart_data = (
 st.bar_chart(
     shot_chart_data,
     x="Person",
-    y="Shot"
+    y="Shot",
+    x_sort="reverse" if False else None
 )
