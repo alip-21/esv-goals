@@ -14,7 +14,7 @@ st.title("Year in Review")
 
 # 4. Page filters
 unique_years = sorted(df["Year"].unique(), reverse=True)
-default_year = [unique_years[1]]
+default_year = unique_years[1]
 
 with st.expander("🔍", expanded=True):
     selected_year = st.selectbox(
