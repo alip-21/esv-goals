@@ -59,6 +59,65 @@ with col4:
 st.markdown("")
 
 # 6. Podium
+st.subheader("Podium")
+
+podium_df = (
+    filtered_df.groupby("Person")
+    .agg(Total_Goals=("Goal", "count"), Total_Shots=("Shot", "sum"))
+    .reset_index()
+)
+
+podium_df["Success_Rate"] = (podium_df["Total_Goals"] - podium_df["Total_Shots"]) / podium_df["Total_Goals"]
+
+podium_df = podium_df.sort_values(
+    by=["Success_Rate", "Total_Goals"], 
+    ascending=[False, False]
+).head(3)
+
+first = podium_df.iloc[0]
+second = podium_df.iloc[1]
+third = podium_df.iloc[2]
+
+st.markdown("""
+    <style>
+    .podium-box {
+        text-align: center;
+        padding: 20px;
+        border-radius: 10px;
+        color: white;
+        font-weight: bold;
+    }
+    .gold { background-color: #FFD700; color: black; margin-top: 0px; }
+    .silver { background-color: #C0C0C0; color: black; margin-top: 40px; }
+    .bronze { background-color: #CD7F32; color: black; margin-top: 80px; }
+    </style>
+""", unsafe_allow_code=True)
+
+col_2, col_1, col_3 = st.columns(3)
+
+with col_2:
+    st.markdown(f"""<div class='podium-box silver'>
+        <h2>🥈</h2>
+        <p>{second['Person']}</p>
+        <h3>{second['Success_Rate']:.0%}</h3>
+        <small>{second['Total_Goals']} Goals</small>
+    </div>""", unsafe_allow_code=True)
+
+with col_1:
+    st.markdown(f"""<div class='podium-box gold'>
+        <h2>🥇</h2>
+        <p>{first['Person']}</p>
+        <h3>{first['Success_Rate']:.0%}</h3>
+        <small>{first['Total_Goals']} Goals</small>
+    </div>""", unsafe_allow_code=True)
+
+with col_3:
+    st.markdown(f"""<div class='podium-box bronze'>
+        <h2>🥉</h2>
+        <p>{third['Person']}</p>
+        <h3>{third['Success_Rate']:.0%}</h3>
+        <small>{third['Total_Goals']} Goals</small>
+    </div>""", unsafe_allow_code=True)
 
 # 7. Chart = Total shots
 st.subheader("Shots")
