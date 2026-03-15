@@ -19,7 +19,7 @@ with st.expander("🔍", expanded=False):
     with col1:
         selected_year = st.pills(
             "Select Year", 
-            options=sorted(df["Year"].unique(), reverse=True), 
+            options=sorted(df["Year"].unique(), reverse=False), 
             selection_mode="multi",
             default=df["Year"].unique()
         )
