@@ -19,7 +19,7 @@ default_year = [unique_years[1]]
 with st.expander("🔍", expanded=True):
     selected_year = st.selectbox(
         "Select Year",             
-        options=sorted(df["Year"].unique()), 
+        options=unique_years, 
         default=default_year
     )
     
