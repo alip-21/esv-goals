@@ -129,7 +129,7 @@ chart = (
     alt.Chart(success_rate_chart_data)
     .mark_bar()
     .encode(
-        x=alt.X(f"{dimension}:N", sort="-y", title=dimension), 
+        x=alt.X(f"{dimension}:N", sort="-y", title=dimension, axis=alt.Axis(labelAngle=45)), 
         y=alt.Y("Success_Rate:Q", title="Success Rate", axis=alt.Axis(format='%')),
         color=alt.value("#1c1f3e"),
         tooltip=[
