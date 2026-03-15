@@ -9,7 +9,10 @@ SHEET_ID = st.secrets["spreadsheet_id"]
 url = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/export?format=csv"
 df = pd.read_csv(url)
 
-# 3. Page filters
+# 3. Page header
+st.title("ESV Goals Database")
+
+# 4. Page filters
 with st.expander("🔍", expanded=False):
     col1, col2, col3 = st.columns(3)
     
@@ -35,9 +38,6 @@ with st.expander("🔍", expanded=False):
         )
 
 filtered_df = df[(df["Year"].isin(selected_year)) & (df["Person"].isin(selected_person)) & (df["Category"].isin(selected_category))]
-
-# 4. Page header
-st.title("ESV Goals Database")
 
 # 5. Data table
 st.subheader("Goal Details")
