@@ -109,6 +109,8 @@ dimension = st.radio(
     horizontal=True
 )
 
+if dimension = "Category": angle = -45 else: angle = 0
+
 success_rate_chart_data = (
     filtered_df.groupby(dimension)
     .agg(Total_Shots=("Shot","sum"), Total_Goals=("Goal", "count"))
@@ -129,7 +131,7 @@ chart = (
     alt.Chart(success_rate_chart_data)
     .mark_bar()
     .encode(
-        x=alt.X(f"{dimension}:N", sort="-y", title=dimension, axis=alt.Axis(labelAngle=-45)), 
+        x=alt.X(f"{dimension}:N", sort="-y", title=dimension, axis=alt.Axis(labelAngle=angle)), 
         y=alt.Y("Success_Rate:Q", title="Success Rate", axis=alt.Axis(format='%')),
         color=alt.value("#1c1f3e"),
         tooltip=[
