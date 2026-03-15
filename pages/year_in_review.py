@@ -109,7 +109,10 @@ dimension = st.radio(
     horizontal=True
 )
 
-if dimension == "Category": angle = -45 else: angle = 0
+if dimension == "Category":
+    angle = -45
+else:
+    angle = 0
 
 success_rate_chart_data = (
     filtered_df.groupby(dimension)
