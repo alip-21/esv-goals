@@ -24,6 +24,8 @@ selected_year = st.selectbox(
     
 filtered_df = df[df["Year"] == selected_year]
 
+st.markdown("")
+
 # 5. 3 metrics across 3 columns
 _, col1, col2, col3, col4, _ = st.columns([1,2,2,2,2,0.1])
 
