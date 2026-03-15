@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import altair as alt
 
 # 1. Page configuration
 st.set_page_config(page_title="Year in Review", layout="wide")
@@ -65,10 +66,18 @@ shot_chart_data = (
     filtered_df.groupby("Person")["Shot"]
     .sum()
     .reset_index()
-    .sort_values(by="Shot", ascending=False))
-st.bar_chart(
-    shot_chart_data,
-    x="Person",
-    y="Shot",
-    x_sort="reverse" if False else None
+    .sort_values(by="Shot", ascending=False)
 )
+
+chart = (
+    alt.Chart(shot_chart_data)
+    .mark_bar()
+    .encode(
+        x=alt.X("Person:N", sort="-y", title="Person"), 
+        y=alt.Y("Shot:Q", title="Total Shots"),
+        color=alt.value("#FF4B4B") # Set your custom color here
+    )
+    .properties(height=400)
+)
+
+st.altair_chart(chart, use_container_width=True)
