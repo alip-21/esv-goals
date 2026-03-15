@@ -17,26 +17,23 @@ with st.expander("🔍", expanded=False):
     col1, col2, col3 = st.columns(3)
     
     with col1:
-        selected_year = st.pills(
+        selected_year = st.multiselect(
             "Select Year", 
             options=sorted(df["Year"].unique()), 
-            selection_mode="multi",
             default=df["Year"].unique()
         )
     
     with col2:
-        selected_person = st.pills(
+        selected_person = st.multiselect(
             "Select Person", 
             options=sorted(df["Person"].unique()),
-            selection_mode="multi",
             default=df["Person"].unique()
         )
         
     with col3:
-        selected_category = st.pills(
+        selected_category = st.multiselect(
             "Select Category", 
             options=sorted(df["Category"].unique()),
-            selection_mode="multi",
             default=df["Category"].unique()
         )
 
