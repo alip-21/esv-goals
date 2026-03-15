@@ -80,16 +80,24 @@ third = podium_df.iloc[2]
 
 st.markdown("""
 <style>
+    .podium-container {
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 20px;
+    }
     .podium-box {
         text-align: center;
-        padding: 20px;
-        border-radius: 10px;
-        color: white;
+        padding: 10px;
+        border-radius: 10px 10px 0 0;
+        color: black;
         font-weight: bold;
+        width: 100%;
     }
-    .gold { background-color: #FFD700; color: black; margin-top: 0px; }
-    .silver { background-color: #C0C0C0; color: black; margin-top: 40px; }
-    .bronze { background-color: #CD7F32; color: black; margin-top: 80px; }
+    .gold { background-color: #FFD700; height: 180px; border: 2px solid #B8860B; }
+    .silver { background-color: #C0C0C0; height: 140px; border: 2px solid #808080; }
+    .bronze { background-color: #CD7F32; height: 100px; border: 2px solid #8B4513; }
 </style>
 """, unsafe_allow_code=True)
 
