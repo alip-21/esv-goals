@@ -17,9 +17,10 @@ with st.expander("🔍", expanded=False):
     col1, col2, col3 = st.columns(3)
     
     with col1:
-        selected_year = st.multiselect(
+        selected_year = st.pills(
             "Select Year", 
             options=sorted(df["Year"].unique(), reverse=True), 
+            selection_mode="multi",
             default=df["Year"].unique()
         )
     
