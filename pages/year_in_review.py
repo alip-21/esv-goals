@@ -79,7 +79,7 @@ second = podium_df.iloc[1]
 third = podium_df.iloc[2]
 
 st.markdown("""
-    <style>
+<style>
     .podium-box {
         text-align: center;
         padding: 20px;
@@ -90,7 +90,7 @@ st.markdown("""
     .gold { background-color: #FFD700; color: black; margin-top: 0px; }
     .silver { background-color: #C0C0C0; color: black; margin-top: 40px; }
     .bronze { background-color: #CD7F32; color: black; margin-top: 80px; }
-    </style>
+</style>
 """, unsafe_allow_code=True)
 
 col_2, col_1, col_3 = st.columns(3)
