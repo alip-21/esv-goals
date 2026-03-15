@@ -74,7 +74,7 @@ podium_df = podium_df.sort_values(
     ascending=[False, False]
 ).head(3)
 
-winners = pod_df.to_dict('records')
+winners = podium_df.to_dict('records')
 
 col2, col1, col3 = st.columns(3)
 
