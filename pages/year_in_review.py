@@ -28,12 +28,12 @@ filtered_df = df[df["Year"] == selected_year]
 st.divider() # Adds a nice clean line under your metrics
 
 # 5. 3 metrics across 3 columns
-col1, col2, col3, col4 = st.columns(4)
+_, col1, col2, col3, col4, _ = st.columns([1,2,2,2,2,1])
 
-total_shots = filtered_df["Shot"].sum()
-total_completed = filtered_df["Complete"].sum()
 total_goals = len(filtered_df)
+total_completed = filtered_df["Complete"].sum()
 successes = len(filtered_df[filtered_df["Status"] == "Yes"])
+total_shots = filtered_df["Shot"].sum()
 
 # Metric 1: Total Goals
 with col1:
