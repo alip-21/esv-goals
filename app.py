@@ -11,6 +11,6 @@ year_in_review_page = st.Page("pages/year_in_review.py", title="Year in Review",
 # Create navigation
 pg = st.navigation(
     {"Menu":[home_page, year_in_review_page]},
-    position="sidebar"
+    position="top"
 )
 pg.run()
