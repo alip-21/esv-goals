@@ -153,8 +153,19 @@ st.altair_chart(chart, use_container_width=True)
 # 8. Chart = Total shots
 st.subheader("🥃 Shots")
 
+dimension = st.radio(
+    "View Success Rate by:",
+    options=["Person", "Category"],
+    horizontal=True
+)
+
+if dimension == "Category":
+    angle = -45
+else:
+    angle = 0
+
 shot_chart_data = (
-    filtered_df.groupby("Person")
+    filtered_df.groupby(dimension)
     .agg(Total_Shots=("Shot","sum"), Total_Goals=("Goal", "count"))
     .reset_index()
     .sort_values(by=["Total_Shots", "Total_Goals"], ascending=[False, True])
@@ -164,7 +175,7 @@ chart = (
     alt.Chart(shot_chart_data)
     .mark_bar()
     .encode(
-        x=alt.X("Person:N", sort="-y", title="Person"), 
+        x=alt.X(f"{dimension}:N", sort="-y", title=dimension, axis=alt.Axis(labelAngle=angle)), 
         y=alt.Y("Total_Shots:Q", title="Shots"),
         color=alt.value("#1c1f3e")
     )
