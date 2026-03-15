@@ -79,13 +79,12 @@ winners = podium_df.to_dict('records')
 col2, col1, col3 = st.columns(3)
 
 with col1:
-    with st.container(border=True, height=280):
+    with st.container(border=True, height=260):
         st.markdown(f"### 🥇 #1 {winners[0]['Person']}")
         st.metric("Success Rate", f"{winners[0]['Success_Rate']:.0%}")
         st.caption(f"{int(winners[0]['Total_Goals'])} Total Goals")
 
 with col2:
-    st.write("")
     st.write("")
     with st.container(border=True, height=240):
         st.markdown(f"### 🥈 #2 {winners[1]['Person']}")
@@ -95,9 +94,7 @@ with col2:
 with col3:
     st.write("")
     st.write("")
-    st.write("")
-    st.write("")
-    with st.container(border=True, height=200):
+    with st.container(border=True, height=220):
         st.markdown(f"### 🥉 #3 {winners[2]['Person']}")
         st.metric("Success Rate", f"{winners[2]['Success_Rate']:.0%}")
         st.caption(f"{int(winners[2]['Total_Goals'])} Total Goals")
