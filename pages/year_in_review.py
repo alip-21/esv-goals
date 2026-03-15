@@ -28,7 +28,7 @@ filtered_df = df[df["Year"] == selected_year]
 st.divider() # Adds a nice clean line under your metrics
 
 # 5. 3 metrics across 3 columns
-_, col1, col2, col3, col4, _ = st.columns([1,2,2,2,2,1])
+_, col1, col2, col3, col4, _ = st.columns([1,2,2,2,2,0])
 
 total_goals = len(filtered_df)
 total_completed = filtered_df["Complete"].sum()
