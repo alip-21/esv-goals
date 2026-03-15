@@ -60,7 +60,7 @@ st.markdown("")
 
 # 6. Podium
 
-# 7. The "Hall of Shame" Chart
+# 7. Chart = Total shots
 st.subheader("Shots")
 shot_chart_data = (
     filtered_df.groupby("Person")["Shot"]
@@ -74,8 +74,8 @@ chart = (
     .mark_bar()
     .encode(
         x=alt.X("Person:N", sort="-y", title="Person"), 
-        y=alt.Y("Shot:Q", title="Total Shots"),
-        color=alt.value("#FF4B4B") # Set your custom color here
+        y=alt.Y("Shot:Q", title="Shots"),
+        color=alt.value("#1c1f3e")
     )
     .properties(height=400)
 )
