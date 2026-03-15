@@ -99,7 +99,32 @@ with col3:
         st.metric("Success Rate", f"{winners[2]['Success_Rate']:.0%}")
         st.caption(f"{int(winners[2]['Total_Goals'])} Total Goals")
 
-# 7. Chart = Total shots
+# 7. Chart - Success Rate
+
+st.subheader("Success Rate")
+
+shot_chart_data = (
+    filtered_df.groupby("Person")
+    .agg(Total_Shots=("Shot","sum"), Total_Goals=("Goal", "count"))
+    .reset_index()
+    .sort_values(by=["Total_Shots", "Total_Goals"], ascending=[False, True])
+)
+
+chart = (
+    alt.Chart(shot_chart_data)
+    .mark_bar()
+    .encode(
+        x=alt.X("Person:N", sort="-y", title="Person"), 
+        y=alt.Y("Success_Rate:Q", title="Success Rate"),
+        color=alt.value("#1c1f3e")
+    )
+    .properties(height=400)
+)
+
+st.altair_chart(chart, use_container_width=True)
+
+
+# 8. Chart = Total shots
 st.subheader("Shots")
 
 shot_chart_data = (
