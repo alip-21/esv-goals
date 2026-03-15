@@ -61,5 +61,9 @@ st.markdown("")
 
 # 7. The "Hall of Shame" Chart
 st.subheader("Shots")
-shot_chart_data = (filtered_df.groupby("Person")["Shot"].sum().sort_values(ascending=False))
+shot_chart_data = (
+    filtered_df.groupby("Person")["Shot"]
+    .sum()
+    .reset_index()
+    .sort_values(by="Shot", ascending=False))
 st.bar_chart(shot_chart_data)
