@@ -25,10 +25,13 @@ with st.expander("🔍", expanded=True):
     
 filtered_df = df[df["Year"] == selected_year]
 
+st.divider() # Adds a nice clean line under your metrics
+
 # 5. 3 metrics across 3 columns
-col1, col2, col3 = st.columns(3)
+col1, col2, col3, col4 = st.columns(4)
 
 total_shots = filtered_df["Shot"].sum()
+total_completed = filtered_df["Complete"].sum()
 total_goals = len(filtered_df)
 successes = len(filtered_df[filtered_df["Status"] == "Yes"])
 
@@ -38,7 +41,7 @@ with col1:
 
 # Metric 2: Total Shots
 with col2:
-    st.metric(label="Total Shots", value=int(total_shots))
+    st.metric(label="Total Completed", value=int(total_completed))
 
 # Metric 3: Success Rate
 with col3:
@@ -48,6 +51,10 @@ with col3:
         st.metric(label="Success Rate", value=f"{rate:.1f}%")
     else:
         st.metric(label="Success Rate", value="0%")
+
+# Metric 4: Total Shots
+with col4:
+    st.metric(label="Total Shots", value=int(total_shots))
 
 st.divider() # Adds a nice clean line under your metrics
 
