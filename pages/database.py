@@ -44,7 +44,7 @@ filtered_df = df[(df["Year"].isin(selected_year)) & (df["Person"].isin(selected_
 
 # 5. Data table
 st.dataframe(
-    filtered_df[["Year", "Person", "Goal", "Status", "Shot"]],
+    filtered_df[["Year", "Person", "Category", "Goal", "Status", "Shot"]],
     use_container_width=True,
     hide_index=True,
     height=600,
