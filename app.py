@@ -51,7 +51,11 @@ st.divider() # Adds a nice clean line under your metrics
 
 # Show the Data Table
 st.subheader("Goal Details")
-st.dataframe(filtered_df[["Year", "Person", "Goal", "Status", "Shot"]], width="container")
+st.dataframe(
+    filtered_df[["Year", "Person", "Goal", "Status", "Shot"]],
+    use_container_width=True,
+    hide_index=True
+)
 
 # 5. The "Hall of Shame" Chart
 st.subheader("Penalty Shot Leaderboard")
