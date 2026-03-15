@@ -92,7 +92,7 @@ with col2:
         st.metric("Success Rate", f"{winners[1]['Success_Rate']:.0%}")
         st.caption(f"{int(winners[1]['Total_Goals'])} Total Goals")
 
-with col1:
+with col3:
     st.write("")
     st.write("")
     st.write("")
