@@ -23,7 +23,7 @@ with st.expander("🔍", expanded=True):
         default=default_year
     )
     
-filtered_df = df[(df["Year"] == selected_year]
+filtered_df = df[df["Year"] == selected_year]
 
 # 5. Data table
 dynamic_height = min(600, (len(filtered_df)*35)+45)
