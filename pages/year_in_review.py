@@ -102,9 +102,6 @@ with col3:
         st.metric("Success Rate", f"{winners[2]['Success_Rate']:.0%}")
         st.caption(f"{int(winners[2]['Total_Goals'])} Total Goals")
 
-else:
-    st.warning("No data found for the current year")
-
 # 7. Chart = Total shots
 st.subheader("Shots")
 
