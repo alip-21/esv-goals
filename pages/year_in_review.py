@@ -103,15 +103,24 @@ with col3:
 
 st.subheader("Success Rate")
 
-shot_chart_data = (
+success_rate_chart_data = (
     filtered_df.groupby("Person")
     .agg(Total_Shots=("Shot","sum"), Total_Goals=("Goal", "count"))
     .reset_index()
-    .sort_values(by=["Total_Shots", "Total_Goals"], ascending=[False, True])
+)
+
+success_rate_chart_data["Success_Rate"] = (
+    (success_rate_chart_data["Total_Goals"] - success_rate_chart_data["Total_Shots"]) 
+    / success_rate_chart_data["Total_Goals"]
+)
+
+success_rate_chart_data = success_rate_chart_data.sort_values(
+    by=["Success_Rate", "Total_Goals"], 
+    ascending=[False, False]
 )
 
 chart = (
-    alt.Chart(shot_chart_data)
+    alt.Chart(success_rate_chart_data)
     .mark_bar()
     .encode(
         x=alt.X("Person:N", sort="-y", title="Person"), 
