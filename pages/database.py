@@ -40,7 +40,6 @@ with st.expander("🔍", expanded=False):
 filtered_df = df[(df["Year"].isin(selected_year)) & (df["Person"].isin(selected_person)) & (df["Category"].isin(selected_category))]
 
 # 5. Data table
-st.subheader("Goal Details")
 st.dataframe(
     filtered_df[["Year", "Person", "Goal", "Status", "Shot"]],
     use_container_width=True,
