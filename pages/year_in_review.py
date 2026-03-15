@@ -56,7 +56,7 @@ with col3:
 with col4:
     st.metric(label="Total Shots", value=int(total_shots))
 
-st.divider() # Adds a nice clean line under your metrics
+st.markdown("---")
 
 # 6. The "Hall of Shame" Chart
 st.subheader("Penalty Shot Leaderboard")
