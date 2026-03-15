@@ -124,7 +124,7 @@ chart = (
     .mark_bar()
     .encode(
         x=alt.X("Person:N", sort="-y", title="Person"), 
-        y=alt.Y("Success_Rate:Q", title="Success Rate"),
+        y=alt.Y("Success_Rate:Q", title="Success Rate", axis=alt.Axis(format='%')),
         color=alt.value("#1c1f3e")
     )
     .properties(height=400)
