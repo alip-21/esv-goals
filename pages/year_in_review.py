@@ -74,58 +74,29 @@ podium_df = podium_df.sort_values(
     ascending=[False, False]
 ).head(3)
 
-first = podium_df.iloc[0]
-second = podium_df.iloc[1]
-third = podium_df.iloc[2]
+winners = pod_df.to_dict('records')
 
-st.markdown("""
-<style>
-    .podium-container {
-        display: flex;
-        align-items: flex-end;
-        justify-content: center;
-        gap: 10px;
-        margin-top: 20px;
-    }
-    .podium-box {
-        text-align: center;
-        padding: 10px;
-        border-radius: 10px 10px 0 0;
-        color: black;
-        font-weight: bold;
-        width: 100%;
-    }
-    .gold { background-color: #FFD700; height: 180px; border: 2px solid #B8860B; }
-    .silver { background-color: #C0C0C0; height: 140px; border: 2px solid #808080; }
-    .bronze { background-color: #CD7F32; height: 100px; border: 2px solid #8B4513; }
-</style>
-""", unsafe_allow_code=True)
+col2, col1, col3 = st.columns(3)
 
-col_2, col_1, col_3 = st.columns(3)
+with col1:
+    st.container(border=True).markdown(f"## 🥇 #1\n**{winners[0]['Person']}**")
+    st.metric("Success Rate", f"{winners[0]['Success_Rate']:.0%}")
+    st.caption(f"{int(winners[0]['Total_Goals'])} Goals")
 
-with col_2:
-    st.markdown(f"""<div class='podium-box silver'>
-        <h2>🥈</h2>
-        <p>{second['Person']}</p>
-        <h3>{second['Success_Rate']:.0%}</h3>
-        <small>{second['Total_Goals']} Goals</small>
-    </div>""", unsafe_allow_code=True)
+with col2:
+    st.write("") # Add spacing to "lower" the second place
+    st.write("")
+    st.container(border=True).markdown(f"### 🥈 #2\n**{winners[1]['Person']}**")
+    st.metric("Success Rate", f"{winners[1]['Success_Rate']:.0%}")
+    st.caption(f"{int(winners[1]['Total_Goals'])} Goals")
 
-with col_1:
-    st.markdown(f"""<div class='podium-box gold'>
-        <h2>🥇</h2>
-        <p>{first['Person']}</p>
-        <h3>{first['Success_Rate']:.0%}</h3>
-        <small>{first['Total_Goals']} Goals</small>
-    </div>""", unsafe_allow_code=True)
-
-with col_3:
-    st.markdown(f"""<div class='podium-box bronze'>
-        <h2>🥉</h2>
-        <p>{third['Person']}</p>
-        <h3>{third['Success_Rate']:.0%}</h3>
-        <small>{third['Total_Goals']} Goals</small>
-    </div>""", unsafe_allow_code=True)
+with col3:
+    st.write("") # Add more spacing to "lower" the third place
+    st.write("")
+    st.write("")
+    st.container(border=True).markdown(f"#### 🥉 #3\n**{winners[2]['Person']}**")
+    st.metric("Success Rate", f"{winners[2]['Success_Rate']:.0%}")
+    st.caption(f"{int(winners[2]['Total_Goals'])} Goals")
 
 # 7. Chart = Total shots
 st.subheader("Shots")
