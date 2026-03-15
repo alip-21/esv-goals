@@ -128,8 +128,9 @@ chart = (
         color=alt.value("#1c1f3e"),
         tooltip=[
             alt.Tooltip("Person"),
-            alt.Tooltip("Success_Rate", format=".0%"),
-            alt.Tooltip("Total_Goals")
+            alt.Tooltip("Success_Rate", format=".0%", title="Success Rate"),
+            alt.Tooltip("Total_Goals", title="Total Goals"),
+            alt.Tooltip("Total_Shots", title="Total Shots"),
         ]
     )
     .properties(height=400)
