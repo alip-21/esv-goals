@@ -103,7 +103,7 @@ with col3:
 
 st.subheader("✅ Success Rate")
 
-dimension = st.radio(
+dimension_success = st.radio(
     "View Success Rate by:",
     options=["Person", "Category"],
     horizontal=True
@@ -115,7 +115,7 @@ else:
     angle = 0
 
 success_rate_chart_data = (
-    filtered_df.groupby(dimension)
+    filtered_df.groupby(dimension_success)
     .agg(Total_Shots=("Shot","sum"), Total_Goals=("Goal", "count"))
     .reset_index()
 )
@@ -134,11 +134,11 @@ chart = (
     alt.Chart(success_rate_chart_data)
     .mark_bar()
     .encode(
-        x=alt.X(f"{dimension}:N", sort="-y", title=dimension, axis=alt.Axis(labelAngle=angle)), 
+        x=alt.X(f"{dimension_success}:N", sort="-y", title=dimension_success, axis=alt.Axis(labelAngle=angle)), 
         y=alt.Y("Success_Rate:Q", title="Success Rate", axis=alt.Axis(format='%')),
         color=alt.value("#1c1f3e"),
         tooltip=[
-            alt.Tooltip(f"{dimension}", title=dimension),
+            alt.Tooltip(f"{dimension_success}", title=dimension_success),
             alt.Tooltip("Success_Rate", format=".0%", title="Success Rate"),
             alt.Tooltip("Total_Goals", title="Total Goals"),
             alt.Tooltip("Total_Shots", title="Total Shots"),
@@ -153,8 +153,8 @@ st.altair_chart(chart, use_container_width=True)
 # 8. Chart = Total shots
 st.subheader("🥃 Shots")
 
-dimension = st.radio(
-    "View Success Rate by:",
+dimension_shots = st.radio(
+    "View Shots by:",
     options=["Person", "Category"],
     horizontal=True
 )
@@ -165,7 +165,7 @@ else:
     angle = 0
 
 shot_chart_data = (
-    filtered_df.groupby(dimension)
+    filtered_df.groupby(dimension_shots)
     .agg(Total_Shots=("Shot","sum"), Total_Goals=("Goal", "count"))
     .reset_index()
     .sort_values(by=["Total_Shots", "Total_Goals"], ascending=[False, True])
@@ -175,7 +175,7 @@ chart = (
     alt.Chart(shot_chart_data)
     .mark_bar()
     .encode(
-        x=alt.X(f"{dimension}:N", sort="-y", title=dimension, axis=alt.Axis(labelAngle=angle)), 
+        x=alt.X(f"{dimension_shots}:N", sort="-y", title=dimension_shots, axis=alt.Axis(labelAngle=angle)), 
         y=alt.Y("Total_Shots:Q", title="Shots"),
         color=alt.value("#1c1f3e")
     )
