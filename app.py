@@ -1,6 +1,16 @@
 import streamlit as st
 import pandas as pd
 
+# 0. Page Definition
+home_page = st.Page("app.py", title="Home", icon="🏠")
+year_in_review_page = st.Page("pages/Year_in_Review.py", title="Year in Review", icon="🗓️")
+
+pg = st.navigation(
+    {"Menu":[home_page, year_in_review_page]},
+    position="hidden"
+)
+pg.run()
+
 # 1. Page Config
 st.set_page_config(page_title="ESV Goals Tracker", layout="wide")
 
