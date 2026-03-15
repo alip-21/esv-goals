@@ -103,8 +103,14 @@ with col3:
 
 st.subheader("✅ Success Rate")
 
+dimension = st.radio(
+    "View Success Rate by:",
+    options=["Person", "Category"],
+    horizontal=True
+)
+
 success_rate_chart_data = (
-    filtered_df.groupby("Person")
+    filtered_df.groupby(dimension)
     .agg(Total_Shots=("Shot","sum"), Total_Goals=("Goal", "count"))
     .reset_index()
 )
@@ -123,11 +129,11 @@ chart = (
     alt.Chart(success_rate_chart_data)
     .mark_bar()
     .encode(
-        x=alt.X("Person:N", sort="-y", title="Person"), 
+        x=alt.X(f"{dimension}:N", sort="-y", title=dimension), 
         y=alt.Y("Success_Rate:Q", title="Success Rate", axis=alt.Axis(format='%')),
         color=alt.value("#1c1f3e"),
         tooltip=[
-            alt.Tooltip("Person"),
+            alt.Tooltip(f"{dimension}", title=dimension),
             alt.Tooltip("Success_Rate", format=".0%", title="Success Rate"),
             alt.Tooltip("Total_Goals", title="Total Goals"),
             alt.Tooltip("Total_Shots", title="Total Shots"),
