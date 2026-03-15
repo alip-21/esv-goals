@@ -109,7 +109,7 @@ dimension_success = st.radio(
     horizontal=True
 )
 
-if dimension == "Category":
+if dimension_success == "Category":
     angle = -45
 else:
     angle = 0
@@ -159,7 +159,7 @@ dimension_shots = st.radio(
     horizontal=True
 )
 
-if dimension == "Category":
+if dimension_shots == "Category":
     angle = -45
 else:
     angle = 0
