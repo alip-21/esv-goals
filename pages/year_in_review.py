@@ -12,5 +12,5 @@ df = load_data()
 
 # --- Page Specific Content ---
 st.title("Year in Review")
-st.write("This is where we celebrate the 100%ers.")
+st.write("Lorem ipsum")
 # Add your charts or specific "Hall of Fame" filters here...
