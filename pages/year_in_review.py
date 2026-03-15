@@ -66,4 +66,8 @@ shot_chart_data = (
     .sum()
     .reset_index()
     .sort_values(by="Shot", ascending=False))
-st.bar_chart(shot_chart_data)
+st.bar_chart(
+    shot_chart_data,
+    x="Person",
+    y="Shot"
+)
