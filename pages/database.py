@@ -44,6 +44,7 @@ st.dataframe(
     filtered_df[["Year", "Person", "Goal", "Status", "Shot"]],
     use_container_width=True,
     hide_index=True,
+    height=600,
     column_config={
         "Year": st.column_config.TextColumn("Year"),
         "Shot": st.column_config.TextColumn("Shot"),
