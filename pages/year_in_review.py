@@ -13,11 +13,14 @@ df = pd.read_csv(url)
 st.title("Year in Review")
 
 # 4. Page filters
-with st.expander("🔍", expanded=False):
+unique_years = sorted(df["Year"].unique(), reverse=True)
+default_year = [unique_years[1]]
+
+with st.expander("🔍", expanded=True):
     selected_year = st.multiselect(
         "Select Year",             
         options=sorted(df["Year"].unique()), 
-        default=df["Year"].unique()
+        default=default_year
     )
     
 filtered_df = df[(df["Year"].isin(selected_year))]
