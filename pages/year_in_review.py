@@ -101,7 +101,7 @@ with col3:
 
 # 7. Chart - Success Rate
 
-st.subheader("Success Rate")
+st.subheader("✅ Success Rate")
 
 success_rate_chart_data = (
     filtered_df.groupby("Person")
@@ -140,7 +140,7 @@ st.altair_chart(chart, use_container_width=True)
 
 
 # 8. Chart = Total shots
-st.subheader("Shots")
+st.subheader("🥃 Shots")
 
 shot_chart_data = (
     filtered_df.groupby("Person")
