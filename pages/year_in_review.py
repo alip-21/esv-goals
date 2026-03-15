@@ -20,7 +20,7 @@ with st.expander("🔍", expanded=True):
     selected_year = st.selectbox(
         "Select Year",             
         options=unique_years, 
-        default=default_year
+        index=default_year
     )
     
 filtered_df = df[df["Year"] == selected_year]
