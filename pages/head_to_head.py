@@ -14,15 +14,18 @@ df = pd.read_csv(url)
 st.title("Head to Head")
 
 # 3. Page filter
+
 with st.expander("🎯 Filter by Category", expanded=False):
+    latest_year = int(df["Year"].max())
+    df_historical = df[df["Year"] < latest_year]
+    
     categories = ["All"] + sorted(df["Category"].unique().tolist())
     selected_cat = st.selectbox("Select Category Focus", options=categories)
 
-# Apply Category Filter
 if selected_cat != "All":
-    display_df = df[df["Category"] == selected_cat]
+    display_df = df_historical[df_historical["Category"] == selected_cat]
 else:
-    display_df = df
+    display_df = df_historical
 
 # 4. Preparation: Get stats for every person
 all_stats = (
