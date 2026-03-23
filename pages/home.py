@@ -108,8 +108,9 @@ with list_col:
     rest_df = podium_df.iloc[3:10][["Person", selected["col"]]]
     
     if not rest_df.empty:
+        rest_df.insert(0, "Rank", range(4, 4 + len(rest_df)))
         rest_df[selected["col"]] = rest_df[selected["col"]].map(selected["format"].format)
-        rest_df.columns = ["Name", selected["label"]]
-        st.table(rest_df)
+        rest_df.columns = ["Rank", "Name", selected["label"]]
+        st.table(rest_df.set_index("Rank"))
     else:
         st.write("No other data to display.")
