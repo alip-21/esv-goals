@@ -40,7 +40,6 @@ _, col1, col2, col3, col4, _ = st.columns([1,2,2,2,2,0.1])
 
 total_goals = len(filtered_df)
 total_completed = filtered_df["Complete"].sum()
-successes = len(filtered_df[filtered_df["Status"] == "Yes"])
 total_shots = filtered_df["Shot"].sum()
 
 # Metric 1: Total Goals
@@ -49,20 +48,19 @@ with col1:
 
 # Metric 2: Total Shots
 with col2:
-    st.metric(label="Total Completed", value=int(total_completed))
+    st.metric(label="Total Completed", value=total_completed)
 
 # Metric 3: Success Rate
 with col3:
-    # Calculating %: (Count of 'Yes' / Total Goals) * 100
     if total_goals > 0:
-        rate = (successes / total_goals) * 100
+        rate = (total_completed / total_goals) * 100
         st.metric(label="Success Rate", value=f"{rate:.1f}%")
     else:
         st.metric(label="Success Rate", value="0%")
 
 # Metric 4: Total Shots
 with col4:
-    st.metric(label="Total Shots", value=int(total_shots))
+    st.metric(label="Total Shots", value=total_shots)
 
 st.markdown("")
 
