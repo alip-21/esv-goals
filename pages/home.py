@@ -76,22 +76,28 @@ winners = podium_df.head(3).to_dict('records')
 col2, col1, col3, list_col = st.columns([2,2,2,3])
 
 with col1:
+    st.markdown("<h3 style='text-align: center;'>🥇</h3>", unsafe_allow_html=True)
     with st.container(border=True, height=246):
-        st.markdown(f"### 🥇 {winners[0]['Person']}")
-        st.metric(selected["label"], f"{winners[0][selected['col']]{selected['format']}}")
+        st.markdown(f"**{winners[0]['Person']}**")
+        val = winners[0][selected['col']]
+        st.metric(selected["label"], selected["format"].format(val))
 
 with col2:
-    st.write("")
+    st.write("") 
+    st.markdown("<h3 style='text-align: center;'>🥈</h3>", unsafe_allow_html=True)
     with st.container(border=True, height=230):
-        st.markdown(f"### 🥈 {winners[1]['Person']}")
-        st.metric(selected["label"], f"{winners[1][selected['col']]{selected['format']}}")
+        st.markdown(f"**{winners[1]['Person']}**")
+        val = winners[1][selected['col']]
+        st.metric(selected["label"], selected["format"].format(val))
 
 with col3:
     st.write("")
     st.write("")
-    with st.container(border=True, height=214):
-        st.markdown(f"### 🥉 {winners[2]['Person']}")
-        st.metric(selected["label"], f"{winners[2][selected['col']]{selected['format']}}")
+    st.markdown("<h3 style='text-align: center;'>🥉</h3>", unsafe_allow_html=True)
+        with st.container(border=True, height=214):
+            st.markdown(f"**{winners[2]['Person']}**")
+            val = winners[2][selected['col']]
+            st.metric(selected["label"], selected["format"].format(val))
 
 with list_col:
     st.subheader("🏃 ... and the Rest")
