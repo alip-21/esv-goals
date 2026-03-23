@@ -95,7 +95,7 @@ with col3:
 
 with list_col:
     st.subheader("🏃 ... and the Rest")
-    rest_df = leaderboard_df.iloc[3:10][["Person", selected["col"]]]
+    rest_df = podium_df.iloc[3:10][["Person", selected["col"]]]
     
     if not rest_df.empty:
         rest_df.columns = ["Name", selected["label"]]
