@@ -1,6 +1,30 @@
 import streamlit as st
 import pandas as pd
 
+st.markdown("""
+    <style>
+    /* Force the main container to fill the screen on mobile rotation */
+    .stApp {
+        height: 100vh !important;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    /* Ensure the scrollable area doesn't get clipped */
+    .main .block-container {
+        padding-bottom: 5rem !important;
+    }
+
+    /* Fix for landscape 'half-screen' on iOS */
+    @media (orientation: landscape) {
+        div[data-testid="stAppViewContainer"] {
+            height: 100% !important;
+            min-height: 100vh !important;
+        }
+    }
+    </style>
+""", unsafe_allow_html=True)
+
 def check_password():
 
     def password_entered():
