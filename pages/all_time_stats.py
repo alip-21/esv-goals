@@ -164,11 +164,27 @@ dimension_trend = st.radio(
     key="trend_dimension_toggle"
 )
 
-selection = alt.selection_point(fields=[dimension_trend], bind='legend')
+metric_trend = st.radio(
+    "Select Metric:",
+    options=["Success Rate", "Total Goals", "Total Shots"],
+    horizontal=True,
+    key="trend_metric_toggle"
+)
+
+trend_metric_map = {
+    "Success Rate": {"col": "Success_Rate", "title": "Success Rate", "fmt": "%", "tip": ".0%"},
+    "Total Goals": {"col": "Total_Completed", "title": "Goals Met", "fmt": "g", "tip": "g"},
+    "Total Shots": {"col": "Total_Shots", "title": "Total Shots", "fmt": "g", "tip": "g"}
+}
+m_info = trend_metric_map[metric_trend]
 
 trend_data = (
     filtered_df.groupby(["Year", dimension_trend])
-    .agg(Total_Goals=("Goal","count"), Total_Completed=("Complete", "sum"))
+    .agg(
+        Total_Goals=("Goal", "count"), 
+        Total_Completed=("Complete", "sum"),
+        Total_Shots=("Shot", "sum")
+    )
     .reset_index()
 )
 
@@ -180,8 +196,8 @@ chart = (
     alt.Chart(trend_data)
     .mark_line(point=True)
     .encode(
-        x=alt.X("Year:O", title="Year"), # :O treats Year as an ordered label
-        y=alt.Y("Success_Rate:Q", title="Success Rate", axis=alt.Axis(format='%')),
+        x=alt.X("Year:O", title="Year"),
+        y=alt.Y(f"{m_info['col']}:Q", title=m_info['title'], axis=alt.Axis(format=m_info['fmt'])),
         color=alt.condition(
             selection, 
             alt.Color(f"{dimension_trend}:N", title=dimension_trend), 
@@ -191,8 +207,8 @@ chart = (
         tooltip=[
             alt.Tooltip("Year"),
             alt.Tooltip(f"{dimension_trend}:N"),
-            alt.Tooltip("Success_Rate:Q", format=".0%", title="Success Rate"),
-            alt.Tooltip("Total_Goals:Q", title="Goals")
+            alt.Tooltip(f"{m_info['col']}:Q", format=m_info['tip'], title=m_info['title']),
+            alt.Tooltip("Total_Goals:Q", title="Total Goals Set")
         ]
     )
     .add_params(selection)
