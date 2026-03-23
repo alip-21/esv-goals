@@ -76,12 +76,3 @@ compare_metric("Success Rate", p1["Success_Rate"], p2["Success_Rate"], is_pct=Tr
 compare_metric("Goals Completed", p1["Total_Completed"], p2["Total_Completed"])
 compare_metric("Total Goals", p1["Total_Goals"], p2["Total_Goals"])
 compare_metric("Total Shots", p1["Total_Shots"], p2["Total_Shots"], lower_is_better=True)
-
-# 8. Fun "Winner" Banner
-st.markdown("---")
-if p1["Success_Rate"] > p2["Success_Rate"]:
-    st.success(f"🏆 Currently Leading: **{p1_name}**")
-elif p2["Success_Rate"] > p1["Success_Rate"]:
-    st.success(f"🏆 Currently Leading: **{p2_name}**")
-else:
-    st.info("🤝 It's a draw")
