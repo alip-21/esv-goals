@@ -54,9 +54,13 @@ st.markdown("---")
 # 6. Comparison Logic Function
 def compare_metric(label, val1, val2, is_pct=False, lower_is_better=False):
     c1, c2, c3 = st.columns([4, 2, 4])
-    fmt = "{:.1%}" if is_pct else "{:g}"
     
-    # Logic for determining the winner
+    # 1. Formatting
+    fmt = "{:.1%}" if is_pct else "{:g}"
+    v1_str = fmt.format(val1)
+    v2_str = fmt.format(val2)
+    
+    # 2. Logic for winner
     if lower_is_better:
         p1_wins = val1 < val2
         p2_wins = val2 < val1
@@ -64,12 +68,22 @@ def compare_metric(label, val1, val2, is_pct=False, lower_is_better=False):
         p1_wins = val1 > val2
         p2_wins = val2 > val1
 
+    # 3. CSS Styles
+    win_style = "color: #1B8532; font-size: 24px; font-weight: bold;"
+    lose_style = "color: #6c757d; font-size: 24px;"
+
     with c1:
-        st.metric(label, fmt.format(val1), delta="WINNER" if p1_wins else None)
+        st.caption(label)
+        style = win_style if p1_wins else lose_style
+        st.markdown(f"<p style='{style}'>{v1_str}</p>", unsafe_allow_html=True)
+
     with c2:
-        st.markdown("<p style='text-align: center; color: gray; margin-top: 25px;'>VS</p>", unsafe_allow_html=True)
+        st.markdown("<p style='text-align: center; color: #ced4da; margin-top: 25px;'>VS</p>", unsafe_allow_html=True)
+
     with c3:
-        st.metric(label, fmt.format(val2), delta="WINNER" if p2_wins else None)
+        st.caption(label)
+        style = win_style if p2_wins else lose_style
+        st.markdown(f"<p style='{style}'>{v2_str}</p>", unsafe_allow_html=True)
 
 # 7. Display the Comparison Rows
 compare_metric("Success Rate", p1["Success_Rate"], p2["Success_Rate"], is_pct=True)
