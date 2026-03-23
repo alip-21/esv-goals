@@ -203,9 +203,10 @@ dimension_trend = st.radio(
 )
 
 trend_data = (
-    filtered_df.groupby(["Year", dimension_trend)
-    .agg(Total_Goals=("Goal","count"), Total_Shots=("Shots", "sum"))
+    filtered_df.groupby(["Year", dimension_trend])
+    .agg(Total_Goals=("Goal","count"), Total_Shots=("Shot", "sum"))
     .reset_index()
+)
 
 trend_data["Success_Rate"] = (
     (trend_data["Total_Goals"] - trend_data["Total_Shots"]) / 
@@ -214,7 +215,7 @@ trend_data["Success_Rate"] = (
   
 chart = (
     alt.Chart(trend_data)
-    .mark_line(point=True) # Adding points makes it easier to see specific years
+    .mark_line(point=True)
     .encode(
         x=alt.X("Year:O", title="Year"), # :O treats Year as an ordered label
         y=alt.Y("Success_Rate:Q", title="Success Rate", axis=alt.Axis(format='%')),
