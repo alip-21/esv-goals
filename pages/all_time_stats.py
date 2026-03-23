@@ -66,48 +66,7 @@ with col4:
 
 st.markdown("")
 
-# 6. Podium
-st.subheader("Podium")
-
-podium_df = (
-    filtered_df.groupby("Person")
-    .agg(Total_Goals=("Goal", "count"), Total_Shots=("Shot", "sum"))
-    .reset_index()
-)
-
-podium_df["Success_Rate"] = (podium_df["Total_Goals"] - podium_df["Total_Shots"]) / podium_df["Total_Goals"]
-
-podium_df = podium_df.sort_values(
-    by=["Success_Rate", "Total_Goals"], 
-    ascending=[False, False]
-).head(3)
-
-winners = podium_df.to_dict('records')
-
-col2, col1, col3 = st.columns(3)
-
-with col1:
-    with st.container(border=True, height=246):
-        st.markdown(f"### 🥇 {winners[0]['Person']}")
-        st.metric("Success Rate", f"{winners[0]['Success_Rate']:.0%}")
-        st.caption(f"{int(winners[0]['Total_Goals'])} Total Goals")
-
-with col2:
-    st.write("")
-    with st.container(border=True, height=230):
-        st.markdown(f"### 🥈 {winners[1]['Person']}")
-        st.metric("Success Rate", f"{winners[1]['Success_Rate']:.0%}")
-        st.caption(f"{int(winners[1]['Total_Goals'])} Total Goals")
-
-with col3:
-    st.write("")
-    st.write("")
-    with st.container(border=True, height=214):
-        st.markdown(f"### 🥉 {winners[2]['Person']}")
-        st.metric("Success Rate", f"{winners[2]['Success_Rate']:.0%}")
-        st.caption(f"{int(winners[2]['Total_Goals'])} Total Goals")
-
-# 7. Chart - Success Rate
+# 6. Chart - Success Rate
 
 st.subheader("✅ Success Rate")
 
@@ -157,8 +116,7 @@ chart = (
 
 st.altair_chart(chart, use_container_width=True)
 
-
-# 8. Chart = Total shots
+# 7. Chart = Total shots
 st.subheader("🥃 Shots")
 
 dimension_shots = st.radio(
@@ -192,7 +150,7 @@ chart = (
 
 st.altair_chart(chart, use_container_width=True)
 
-# 9. Chart = Evolution
+# 8. Chart = Evolution
 st.subheader("📈 Evolution")
 
 dimension_trend = st.radio(
