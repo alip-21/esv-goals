@@ -63,11 +63,11 @@ def compare_metric(label, val1, val2, is_pct=False, lower_is_better=False):
     v2_str = fmt.format(val2)
 
     if lower_is_better:
-        p1_wins = val1 < val2
-        p2_wins = val2 < val1
+        p1_wins = val1 <= val2
+        p2_wins = val2 <= val1
     else:
-        p1_wins = val1 > val2
-        p2_wins = val2 > val1
+        p1_wins = val1 >= val2
+        p2_wins = val2 >= val1
 
     win_style = "color: #1B8532; font-size: 24px; font-weight: bold;"
     lose_style = "color: #6c757d; font-size: 24px;"
