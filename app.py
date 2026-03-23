@@ -30,6 +30,8 @@ def check_password():
     else:
         return True
 
+if check_password():
+
 # Page configuration
 st.set_page_config(layout="wide")
 
