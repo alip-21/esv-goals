@@ -15,6 +15,10 @@ st.title("All Time Stats")
 
 # 4. Page filters
 with st.expander("🔍", expanded=False):
+
+    latest_year = int(df["Year"].max())
+    df_historical = df[df["Year"] < latest_year]
+    
     col1, col2 = st.columns(2)
     
     with col1:
