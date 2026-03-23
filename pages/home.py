@@ -89,7 +89,7 @@ with col1:
 with col2:
     st.write("") 
     st.markdown("<h3 style='text-align: center;'>🥈</h3>", unsafe_allow_html=True)
-    with st.container(border=True, height=230):
+    with st.container(border=True, height=250):
         st.markdown(f"**{winners[1]['Person']}**")
         val = winners[1][selected['col']]
         st.metric(selected["label"], selected["format"].format(val))
