@@ -65,7 +65,7 @@ podium_df = (
     .reset_index()
 )
 
-podium_df["Success_Rate"] = (podium_df["Total_Completed"] / podium_df["Total_Goals"]
+podium_df["Success_Rate"] = podium_df["Total_Completed"] / podium_df["Total_Goals"]
 
 podium_df = podium_df.sort_values(
     by=["Success_Rate", "Total_Goals"], 
