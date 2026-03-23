@@ -33,7 +33,7 @@ def check_password():
 if check_password():
 
     # Page configuration
-    st.set_page_config(layout="centered")
+    st.set_page_config(layout="wide")
 
     # Define the pages
     home_page = st.Page("pages/home.py", title="Home", icon="🏠", default=True)
