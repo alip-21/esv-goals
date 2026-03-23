@@ -32,7 +32,6 @@ _, col1, col2, col3, col4, _ = st.columns([1,2,2,2,2,0.1])
 
 total_goals = len(filtered_df)
 total_completed = filtered_df["Complete"].sum()
-successes = len(filtered_df[filtered_df["Status"] == "Yes"])
 total_shots = filtered_df["Shot"].sum()
 
 # Metric 1: Total Goals
@@ -41,20 +40,19 @@ with col1:
 
 # Metric 2: Total Shots
 with col2:
-    st.metric(label="Total Completed", value=int(total_completed))
+    st.metric(label="Total Completed", value=total_completed)
 
 # Metric 3: Success Rate
 with col3:
-    # Calculating %: (Count of 'Yes' / Total Goals) * 100
     if total_goals > 0:
-        rate = (successes / total_goals) * 100
+        rate = (total_completed / total_goals) * 100
         st.metric(label="Success Rate", value=f"{rate:.1f}%")
     else:
         st.metric(label="Success Rate", value="0%")
 
 # Metric 4: Total Shots
 with col4:
-    st.metric(label="Total Shots", value=int(total_shots))
+    st.metric(label="Total Shots", value=total_shots)
 
 st.markdown("")
 
@@ -63,11 +61,11 @@ st.subheader("Podium")
 
 podium_df = (
     filtered_df.groupby("Person")
-    .agg(Total_Goals=("Goal", "count"), Total_Shots=("Shot", "sum"))
+    .agg(Total_Goals=("Goal", "count"), Total_Completed=("Complete", "sum"))
     .reset_index()
 )
 
-podium_df["Success_Rate"] = (podium_df["Total_Goals"] - podium_df["Total_Shots"]) / podium_df["Total_Goals"]
+podium_df["Success_Rate"] = (podium_df["Total_Completed"] / podium_df["Total_Goals"]
 
 podium_df = podium_df.sort_values(
     by=["Success_Rate", "Total_Goals"], 
@@ -116,13 +114,12 @@ else:
 
 success_rate_chart_data = (
     filtered_df.groupby(dimension_success)
-    .agg(Total_Shots=("Shot","sum"), Total_Goals=("Goal", "count"))
+    .agg(Total_Completed=("Complete","sum"), Total_Goals=("Goal", "count"))
     .reset_index()
 )
 
 success_rate_chart_data["Success_Rate"] = (
-    (success_rate_chart_data["Total_Goals"] - success_rate_chart_data["Total_Shots"]) 
-    / success_rate_chart_data["Total_Goals"]
+    success_rate_chart_data["Total_Completed"] / success_rate_chart_data["Total_Goals"]
 )
 
 success_rate_chart_data = success_rate_chart_data.sort_values(
@@ -141,7 +138,7 @@ chart = (
             alt.Tooltip(f"{dimension_success}", title=dimension_success),
             alt.Tooltip("Success_Rate", format=".0%", title="Success Rate"),
             alt.Tooltip("Total_Goals", title="Total Goals"),
-            alt.Tooltip("Total_Shots", title="Total Shots"),
+            alt.Tooltip("Total_Completed", title="Total Completed"),
         ]
     )
     .properties(height=400)
