@@ -164,6 +164,8 @@ dimension_trend = st.radio(
     key="trend_dimension_toggle"
 )
 
+selection = alt.selection_point(fields=[dimension_trend], bind='legend')
+
 trend_data = (
     filtered_df.groupby(["Year", dimension_trend])
     .agg(Total_Goals=("Goal","count"), Total_Completed=("Complete", "sum"))
@@ -180,7 +182,12 @@ chart = (
     .encode(
         x=alt.X("Year:O", title="Year"), # :O treats Year as an ordered label
         y=alt.Y("Success_Rate:Q", title="Success Rate", axis=alt.Axis(format='%')),
-        color=alt.Color(f"{dimension_trend}:N", title=dimension_trend),
+        color=alt.condition(
+            selection, 
+            alt.Color(f"{dimension_trend}:N", title=dimension_trend), 
+            alt.value("lightgray")
+        ),
+        opacity=alt.condition(selection, alt.value(1), alt.value(0.2)),
         tooltip=[
             alt.Tooltip("Year"),
             alt.Tooltip(f"{dimension_trend}:N"),
@@ -188,6 +195,7 @@ chart = (
             alt.Tooltip("Total_Goals:Q", title="Goals")
         ]
     )
+    .add_params(selection)
     .properties(height=400)
     .interactive()
 )
