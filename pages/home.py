@@ -12,12 +12,16 @@ df = pd.read_csv(url)
 # 3. Page header
 st.title("🏆 ESV Goals")
 
-# 4. 4 metrics across 4 columns
+# 4. Page filters
+latest_year = int(df["Year"].max())
+df_historical = df[df["Year"] < latest_year]
+
+# 5. 4 metrics across 4 columns
 _, col1, col2, col3, col4, _ = st.columns([1,2,2,2,2,0.1])
 
-total_goals = len(df)
-total_completed = df["Complete"].sum()
-total_shots = df["Shot"].sum()
+total_goals = len(df_historical)
+total_completed = df_historical["Complete"].sum()
+total_shots = df_historical["Shot"].sum()
 
 # Metric 1: Total Goals
 with col1:
@@ -41,7 +45,7 @@ with col4:
 
 st.markdown("")
 
-# 5. Podium
+# 6. Podium
 st.subheader("Podium")
 
 ranking_metric = st.selectbox(
@@ -58,7 +62,7 @@ metric_map = {
 selected = metric_map[ranking_metric]
 
 podium_df = (
-    df.groupby("Person")
+    df_historical.groupby("Person")
     .agg(
         Total_Goals=("Goal", "count"),
         Total_Completed=("Complete", "sum"),
