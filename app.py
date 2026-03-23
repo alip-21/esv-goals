@@ -1,6 +1,34 @@
 import streamlit as st
 import pandas as pd
 
+st.markdown("""
+    <style>
+    /* 1. Target the 'Barrel' container specifically */
+    div[data-testid="stAppViewBlockContainer"] {
+        min-height: 100vh !important;
+        height: auto !important;
+        padding-top: 2rem !important;
+        padding-bottom: 5rem !important;
+    }
+
+    /* 2. Target the parent scroll container */
+    div[data-testid="stAppViewContainer"] {
+        height: 100vh !important;
+    }
+
+    /* 3. Remove the 'max-width' that Centered mode sometimes forces */
+    .main .block-container {
+        max-width: 95% !important;
+    }
+
+    /* 4. Force visibility on the bottom half */
+    #root, .appview-container {
+        height: 100vh !important;
+        overflow: visible !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
 def check_password():
 
     def password_entered():
