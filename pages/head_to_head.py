@@ -77,9 +77,9 @@ def compare_metric(label, val1, val2, is_pct=False, lower_is_better=False):
     with c2:
         st.markdown("<p style='text-align: center; color: #ced4da; margin-top: 25px; font-weight: bold;'>VS</p>", unsafe_allow_html=True)
     with c3:
-        st.caption(label)
+        st.markdown(f" <p style='text-align: left; margin-bottom: -10px; color: gray; font-size: 14px;'>{label}</p>", unsafe_allow_html=True)
         style = win_style if p2_wins else lose_style
-        st.markdown(f"<p style='{style}'>{v2_str}</p>", unsafe_allow_html=True)
+        st.markdown(f"<p style='{style} text-align: left;'>{v2_str}</p>", unsafe_allow_html=True)
 
 # 7. Display the Comparison Rows
 compare_metric("Success Rate", p1["Success_Rate"], p2["Success_Rate"], is_pct=True)
