@@ -35,7 +35,10 @@ with st.expander("🔍", expanded=False):
             default=df["Category"].unique()
         )
 
-filtered_df = df[(df["Person"].isin(selected_person)) & (df["Category"].isin(selected_category))]
+filtered_df = df_historical[
+    (df_historical["Person"].isin(selected_person)) & 
+    (df_historical["Category"].isin(selected_category))
+]
 
 st.markdown("")
 
