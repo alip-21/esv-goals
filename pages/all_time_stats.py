@@ -81,13 +81,12 @@ else:
 
 success_rate_chart_data = (
     filtered_df.groupby(dimension_success)
-    .agg(Total_Shots=("Shot","sum"), Total_Goals=("Goal", "count"))
+    .agg(Total_Completed=("Complete","sum"), Total_Goals=("Goal", "count"))
     .reset_index()
 )
 
 success_rate_chart_data["Success_Rate"] = (
-    (success_rate_chart_data["Total_Goals"] - success_rate_chart_data["Total_Shots"]) 
-    / success_rate_chart_data["Total_Goals"]
+    success_rate_chart_data["Total_Completed"] / success_rate_chart_data["Total_Goals"]
 )
 
 success_rate_chart_data = success_rate_chart_data.sort_values(
@@ -160,13 +159,12 @@ dimension_trend = st.radio(
 
 trend_data = (
     filtered_df.groupby(["Year", dimension_trend])
-    .agg(Total_Goals=("Goal","count"), Total_Shots=("Shot", "sum"))
+    .agg(Total_Goals=("Goal","count"), Total_Completed=("Complete", "sum"))
     .reset_index()
 )
 
 trend_data["Success_Rate"] = (
-    (trend_data["Total_Goals"] - trend_data["Total_Shots"]) / 
-    trend_data["Total_Goals"].replace(0, 1)
+    trend_data["Total_Completed"] / trend_data["Total_Goals"].replace(0, 1)
 )
   
 chart = (
