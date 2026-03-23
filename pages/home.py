@@ -81,7 +81,7 @@ col2, col1, col3, list_col = st.columns([2,2,2,3])
 
 with col1:
     st.markdown("<h3 style='text-align: center;'>🥇</h3>", unsafe_allow_html=True)
-    with st.container(border=True, height=246):
+    with st.container(border=True, height=261):
         st.markdown(f"**{winners[0]['Person']}**")
         val = winners[0][selected['col']]
         st.metric(selected["label"], selected["format"].format(val))
