@@ -171,6 +171,8 @@ metric_trend = st.radio(
     key="trend_metric_toggle"
 )
 
+selection = alt.selection_point(fields=[dimension_trend], bind='legend')
+
 trend_metric_map = {
     "Success Rate": {"col": "Success_Rate", "title": "Success Rate", "fmt": "%", "tip": ".0%"},
     "Total Goals": {"col": "Total_Completed", "title": "Goals Met", "fmt": "g", "tip": "g"},
