@@ -94,10 +94,10 @@ with col3:
     st.write("")
     st.write("")
     st.markdown("<h3 style='text-align: center;'>🥉</h3>", unsafe_allow_html=True)
-        with st.container(border=True, height=214):
-            st.markdown(f"**{winners[2]['Person']}**")
-            val = winners[2][selected['col']]
-            st.metric(selected["label"], selected["format"].format(val))
+    with st.container(border=True, height=214):
+        st.markdown(f"**{winners[2]['Person']}**")
+        val = winners[2][selected['col']]
+        st.metric(selected["label"], selected["format"].format(val))
 
 with list_col:
     st.subheader("🏃 ... and the Rest")
