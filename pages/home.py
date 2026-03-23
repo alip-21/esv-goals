@@ -56,7 +56,7 @@ ranking_metric = st.selectbox(
 
 metric_map = {
     "Success Rate": {"col": "Success_Rate", "format": "{:.0%}", "label": "Success Rate"},
-    "Total Goals": {"col": "Total_Goals", "format": "{:g}", "label": "Goals"},
+    "Total Goals": {"col": "Total_Goals", "format": "{:g}", "label": "Total Goals"},
     "Total Shots": {"col": "Total_Shots", "format": "{:g}", "label": "Shots Taken"}
 }
 selected = metric_map[ranking_metric]
