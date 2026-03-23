@@ -105,7 +105,7 @@ chart = (
             alt.Tooltip(f"{dimension_success}", title=dimension_success),
             alt.Tooltip("Success_Rate", format=".0%", title="Success Rate"),
             alt.Tooltip("Total_Goals", title="Total Goals"),
-            alt.Tooltip("Total_Shots", title="Total Shots"),
+            alt.Tooltip("Total_Completed", title="Total Completed"),
         ]
     )
     .properties(height=400)
