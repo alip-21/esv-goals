@@ -40,3 +40,65 @@ with col4:
     st.metric(label="Total Shots", value=total_shots)
 
 st.markdown("")
+
+# 5. Podium
+st.subheader("Podium")
+
+ranking_metric = st.selectbox(
+    "Rank Podium by:",
+    options=["Success Rate", "Total Goals", "Total Shots"],
+    index=0
+)
+
+metric_map = {
+    "Success Rate": {"col": "Success_Rate", "format": ":.0%", "label": "Success Rate"},
+    "Total Goals": {"col": "Complete", "format": ":g", "label": "Goals Met"},
+    "Total Shots": {"col": "Shot", "format": ":g", "label": "Shots Taken"}
+}
+
+podium_df = (
+    df.groupby("Person")
+    .agg(
+        Total_Goals=("Goal", "count")
+        Total_Completed=("Complete", "sum"),
+        Total_Shots=("Shot", "sum")    
+    )
+    .reset_index()
+)
+
+podium_df["Success_Rate"] = podium_df["Total_Completed"] / podium_df["Total_Goals"]
+
+podium_df = podium_df.sort_values(by=selected["col"], ascending=False).reset_index(drop=True)
+
+winners = podium_df.head(3).to_dict('records')
+
+col2, col1, col3, list_col = st.columns([2,2,2,3])
+
+with col1:
+    with st.container(border=True, height=246):
+        st.markdown(f"### 🥇 {winners[0]['Person']}")
+        st.metric(selected["label"], f"{winners[0][selected['col']]{selected['format']}}")
+
+with col2:
+    st.write("")
+    with st.container(border=True, height=230):
+        st.markdown(f"### 🥈 {winners[1]['Person']}")
+        st.metric(selected["label"], f"{winners[1][selected['col']]{selected['format']}}")
+
+with col3:
+    st.write("")
+    st.write("")
+    with st.container(border=True, height=214):
+        st.markdown(f"### 🥉 {winners[2]['Person']}")
+        st.metric(selected["label"], f"{winners[2][selected['col']]{selected['format']}}")
+
+with list_col:
+    st.subheader("🏃 ... and the Rest")
+    rest_df = leaderboard_df.iloc[3:10][["Person", selected["col"]]]
+    
+    if not rest_df.empty:
+        rest_df.columns = ["Name", selected["label"]]
+        
+        st.table(rest_df)
+    else:
+        st.write("No other data to display.")
