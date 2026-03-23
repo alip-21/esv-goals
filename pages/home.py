@@ -55,11 +55,12 @@ metric_map = {
     "Total Goals": {"col": "Total_Completed", "format": ":g", "label": "Goals Met"},
     "Total Shots": {"col": "Total_Shots", "format": ":g", "label": "Shots Taken"}
 }
+selected = metric_map[ranking_metric]
 
 podium_df = (
     df.groupby("Person")
     .agg(
-        Total_Goals=("Goal", "count")
+        Total_Goals=("Goal", "count"),
         Total_Completed=("Complete", "sum"),
         Total_Shots=("Shot", "sum")    
     )
