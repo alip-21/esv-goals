@@ -37,6 +37,7 @@ st.set_page_config(layout="wide")
 
 # Define the pages
 home_page = st.Page("pages/home.py", title="Home", icon="🏠", default=True)
+this_year_page = st.Page("pages/this_year.py", title="This Year", icon="⏳")
 year_in_review_page = st.Page("pages/year_in_review.py", title="Year in Review", icon="🗓️")
 all_time_stats_page = st.Page("pages/all_time_stats.py", title="All Time Stats", icon="📈")
 head_to_head_page = st.Page("pages/head_to_head.py", title="Head to Head", icon="🥊")
