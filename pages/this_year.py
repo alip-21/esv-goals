@@ -40,22 +40,28 @@ st.markdown("""
         width: 100%;
         border-collapse: collapse;
         font-family: sans-serif;
-        font-size: 0.85rem;
+        font-size: 0.82rem; /* Slightly smaller for better mobile fit */
     }
     .goals-grid th {
         background-color: #1c1f3e;
         color: white;
-        padding: 10px;
+        padding: 6px 10px; /* Reduced vertical padding */
         border: 1px solid #ddd;
         text-align: center;
+        vertical-align: middle;
     }
     .goals-grid td {
-        padding: 10px;
+        padding: 8px 10px; /* Snugger vertical padding */
         border: 1px solid #ddd;
-        vertical-align: top;
-        line-height: 1.4;
+        vertical-align: middle; /* This aligns the text to the center of the cell height */
+        line-height: 1.2; /* Tighter line spacing for multiple goals */
+        color: #333;
     }
+    /* Zebra striping for readability */
     .goals-grid tr:nth-child(even) {background-color: #f9f9f9;}
+    
+    /* Optional: Hover effect to help eyes follow the row on wide screens */
+    .goals-grid tr:hover {background-color: #f1f1f1;}
     </style>
 """, unsafe_allow_html=True)
 
