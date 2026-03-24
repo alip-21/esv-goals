@@ -30,6 +30,8 @@ pivot_df = (
     .unstack(fill_value="<div style='color:#ccc;'>-</div>")
 )
 
+pivot_df.columns.name = None
+
 existing_columns = [c for c in sorted_category_names if c in pivot_df.columns]
 pivot_df = pivot_df[existing_columns]
 
