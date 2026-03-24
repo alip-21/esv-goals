@@ -17,6 +17,13 @@ current_goals = df[df["Year"] == current_year].copy()
 st.title(f"🎯 {current_year} Goals")
 
 # 5. Pivot the data
+cat_mapping = (
+    df[["Category ID", "Category"]]
+    .drop_duplicates()
+    .sort_values("Category ID")
+)
+sorted_category_names = cat_mapping["Category"].tolist()
+
 pivot_df = (
     current_goals.groupby(["Person", "Category"])["Goal"]
     .apply(lambda x: "<br>• " + "<br>• ".join(x))
