@@ -9,14 +9,12 @@ SHEET_ID = st.secrets["spreadsheet_id"]
 url = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/export?format=csv"
 df = pd.read_csv(url)
 
-# 3. Page header
-st.title("This Year")
-
-# 4. Filter for the current year only
+# 3. Filter for the current year only
 current_year = df["Year"].max()
 current_goals = df[df["Year"] == current_year].copy()
 
-st.subheader(f"🎯 {current_year} Goals")
+# 4. Page header
+st.title(f"🎯 {current_year} Goals")
 
 # 5. Pivot the data
 pivot_df = (
