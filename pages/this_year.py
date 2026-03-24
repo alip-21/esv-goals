@@ -80,6 +80,5 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # 7. Convert the DataFrame to HTML and display
-# 'escape=False' is critical so the <br> tags actually create new lines
-html_table = pivot_df.to_html(escape=False, classes='goals-grid')
-st.markdown(html_table, unsafe_allow_html=True)
+st.write(f"### 🎯 {current_year} Goals Matrix")
+st.markdown(f'<div class="table-container">{pivot_df.to_html(escape=False, classes="goals-grid")}</div>', unsafe_allow_html=True)
