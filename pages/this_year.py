@@ -30,6 +30,9 @@ pivot_df = (
     .unstack(fill_value="-")
 )
 
+existing_columns = [c for c in sorted_category_names if c in pivot_df.columns]
+pivot_df = pivot_df[existing_columns]
+
 # 6. Custom CSS to make the table look like a "Grid"
 st.markdown("""
     <style>
