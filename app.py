@@ -45,7 +45,7 @@ database_page = st.Page("pages/database.py", title="Goals Database", icon="💾"
 
 # Create navigation
 pg = st.navigation(
-    {"Menu":[home_page, year_in_review_page, all_time_stats_page, head_to_head_page, database_page]},
+    {"Menu":[home_page, this_year_page, year_in_review_page, all_time_stats_page, head_to_head_page, database_page]},
     position="top"
 )
 pg.run()
