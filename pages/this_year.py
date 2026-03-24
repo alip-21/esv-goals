@@ -31,6 +31,7 @@ pivot_df = (
 )
 
 pivot_df.columns.name = None
+pivot_df.index.name = None
 
 existing_columns = [c for c in sorted_category_names if c in pivot_df.columns]
 pivot_df = pivot_df[existing_columns]
